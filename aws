@@ -1,0 +1,12 @@
+sudo apt-update
+sudo apt-get install docker.io
+sudo apt install nano
+sudo apt install git
+git clone
+cd
+nano Dockerfile: 
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
+sudo docker build -t mywebapp .
+sudo docker run -d -p 80:80 mywebapp
