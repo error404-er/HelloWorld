@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+    tools{
+        maven 'MAVEN_HOME'
+    }
+    stages {
+        stage('git repo & clean') {
+            steps {
+                //bat "rmdir  /s /q mavenjava"
+                bat "git clone https://github.com/Harshinampally/Hibernate.git"
+                bat "mvn clean -f Hibernate"
+            }
+        }
+        stage('install') {
+            steps {
+                bat "mvn install -f Hibernate" 
+            }
+        }
+        stage('test') {
+            steps {
+                bat "mvn test -f Hibernate"
+            }
+        }
+        stage('package') {
+            steps {
+                bat "mvn package -f Hibernate"
+            }
+        }
+    }
+}\
+
+
+
+
+minikube start
+minikube status
+kubectl get deployments
+kubectl create deployment mynginx --image=nginx
+kubectl scale deployment mynginx --replicas=4
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+kubectl get service mynginx
+kubectl port-forward svc/mynginx 8081:80
+
+
+
+
+
+docker pull jasonrivers/nagios:latest
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+
+
+
+
+sudo apt update
+sudo apt-get install docker.io
+sudo apt install nano
+sudo apt install git
+git clone https://...
+cd reponame
+sudo docker build -t mywebapp .
+sudo docker run -d -p 80:80 mywebapp
